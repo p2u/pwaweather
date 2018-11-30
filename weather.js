@@ -1,19 +1,33 @@
+"use strict";
 const main = document.querySelector('main');
 const citySelector = document.querySelector('#citySelector');
 const appKey = "b554424da5715ae40ee25d7ac9c307bf";
-const defaultCityId = "3061370";	// Zlin
 const requestOpt = "&units=metric&lang=cz";
 const weatherUrl = "https://api.openweathermap.org/data/2.5/";
 const imgUrl = "https://openweathermap.org/img/w/";
+const userCityId = "userCityId";
+const defaultCityId = "3061370";	// Zlin
+var weather;
 
 window.addEventListener("load", async e => {
 	await updateCitySelector();
-	citySelector.value = defaultCityId;
+	setValue(userCityId, getValue(userCityId) || defaultCityId);
+	citySelector.value = getValue(userCityId);
 	citySelector.addEventListener("change", e => {
-		updateWeather(e.target.value);
+		let cityId = e.target.value;
+		setValue(userCityId, cityId);
+		updateWeather();
 	});
 	updateWeather();
 });
+
+function getValue(name) {
+        return window.localStorage.getItem(name);
+}
+
+function setValue(name, value) {
+        window.localStorage.setItem(name, value);
+}
 
 async function updateCitySelector() {
 	const citiesJson = await fetch("./city.cs.list.json");
@@ -24,9 +38,10 @@ async function updateCitySelector() {
 		).join('\n');
 };
 
-async function updateWeather(cityId = defaultCityId) {
+async function updateWeather() {
+	const cityId = getValue(userCityId);
 	const weatherJson = await fetch(`${weatherUrl}weather?id=${cityId}&appid=${appKey}${requestOpt}`);
-	const weather = await weatherJson.json();
+	weather = await weatherJson.json();
 	main.innerHTML = printWeather(weather);
 };
 
