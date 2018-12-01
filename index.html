@@ -1,21 +1,58 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<link rel="manifest" href="./manifest.json">
-		<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
-		<title> Počasí </title>
-	</head>
-	<body>
-		<header>
-			<h1> Předpověď počasí  </h1>
-		</header>
-		<main>
-			Aplikace zobrazuje aktuální počasí a předpověď počasí na pět dní pro vybraná města.
-			<br>
-			<a href="./weather.html">Zobrazit počasí</a>
-		</main>
-		<script src="./regsw.js"></script>
-	</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+    <!-- Your app title -->
+    <title> Počasí </title>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <!-- Path to Framework7 Library CSS -->
+    <link rel="stylesheet" href="./framework7.min.css">
+  </head>
+  <body>
+    <!-- App root element -->
+    <div id="app">
+      <!-- Statusbar overlay -->
+      <div class="statusbar"></div>
+
+      <!-- Your main view, should have "view-main" class -->
+      <div class="view view-main">
+        <!-- Initial Page, "data-name" contains page name -->
+        <div data-name="home" class="page">
+
+          <!-- Top Navbar -->
+          <div class="navbar">
+            <div class="navbar-inner">
+              <div class="title"> Počasí </div>
+            </div>
+          </div>
+
+          <!-- Toolbar -->
+          <div class="toolbar">
+            <div class="toolbar-inner">
+              <!-- Toolbar links -->
+	      <a href="#" class="link"></a>
+	      <a href="./weather.html" class="link external">Aktuální počasí</a>
+            </div>
+          </div>
+
+          <!-- Scrollable page content -->
+          <div class="page-content">
+	    <main>
+		Aplikace zobrazuje aktuální počasí a předpověď počasí na pět dní pro vybraná města.
+	    </main>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Path to Framework7 Library JS-->
+    <script type="text/javascript" src="./framework7.min.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+    <script type="text/javascript" src="./regsw.js"></script>
+  </body>
 </html>
 

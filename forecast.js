@@ -14,7 +14,7 @@ window.addEventListener("load", async e => {
 	for (let i = 0; i < weather.list.length; i++) {
 		main.innerHTML += printWeather(weather.list[i]);
 	}
-
+	initGui();
 });
 
 function getValue(name) {
@@ -42,4 +42,29 @@ function printWeather(weather) {
 		<img src="${imgUrl}${weather.weather[0].icon}.png" alt="${weather.weather[0].description}" width="100" height="100"> <br>
 		`;
 };
+
+function initGui() {
+        var theweather = new Framework7({
+          // App root element
+          root: '#app',
+          // App Name
+          name: 'TheWeather',
+          // App id
+          id: 'com.github.p2u.pwaweather',
+          // Enable swipe panel
+          panel: {
+            swipe: 'left',
+          },
+          // Add default routes
+	  routes: [
+		    {
+		      path: '/about/',
+		      url: 'about.html',
+		    },
+		  ],
+          // ... other parameters
+        });
+
+        var mainView = theweather.views.create('.view-main');
+}
 

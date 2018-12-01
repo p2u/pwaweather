@@ -1,12 +1,16 @@
 const staticAssets = [
 	'./',
+	'./favicon.ico',
 	'./index.html',
+	'./index.js',
 	'./regsw.js',
 	'./weather.html',
 	'./weather.js',
 	'./city.cs.list.json',
 	'./forecast.html',
-	'./forecast.js'
+	'./forecast.js',
+	'./framework7.min.css',
+	'./framework7.min.js'
 ];
 
 self.addEventListener('install', async e => {
