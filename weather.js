@@ -47,6 +47,7 @@ async function updateWeather() {
 
 function printWeather(weather) {
 	return `
+		Místo: ${weather.name} <br>
 		Severní šířka: ${weather.coord.lat} <br>
 		Východní délka: ${weather.coord.lon} <br>
 		Aktuální teplota: ${weather.main.temp} °C <br>
