@@ -1,16 +1,43 @@
-
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.1/workbox-sw.js');
 const staticAssets = [
 	'./',
 	'./index.html',
+	'./regsw.js',
 	'./weather.html',
 	'./weather.js',
-	'./forecast.html',
-	'./forecast.js',
 	'./city.cs.list.json',
-	'./regsw.js'
+	'./forecast.html',
+	'./forecast.js'
 ];
 
-workbox.precaching.precacheAndRoute(staticAssets);
-workbox.routing.registerRoute(/https:\/\/api.openweathermap.org\/.*/, workbox.strategies.networkFirst());
+self.addEventListener('install', async e => {
+	const cache = await caches.open('theweather-static');
+	cache.addAll(staticAssets);
+});
+
+self.addEventListener('fetch', e => {
+	const req = e.request;
+	const url = new URL(req.url);
+
+	if (url.origin == location.origin) {
+		e.respondWith(cacheFirst(req));
+	} else {
+		e.respondWith(networkFirst(req));
+	}
+});
+
+async function cacheFirst(req) {
+	const cachedResponse = await caches.match(req);
+	return cachedResponse || networkFirst(req);
+}
+
+async function networkFirst(req) {
+	const cache = await caches.open('theweather-dynamic');
+	try {
+		const res = await fetch(req);
+		cache.put(req, res.clone());
+		return res;
+	} catch (error) {
+		return await cache.match(req);
+	}
+}
 
