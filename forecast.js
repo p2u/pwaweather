@@ -10,6 +10,7 @@ var weather;
 
 window.addEventListener("load", async e => {
 	await fetchWeather();
+	main.innerHTML = `Místo: ${weather.city.name} <br>`;
 	for (let i = 0; i < weather.list.length; i++) {
 		main.innerHTML += printWeather(weather.list[i]);
 	}
