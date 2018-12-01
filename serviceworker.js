@@ -6,8 +6,7 @@ const staticAssets = [
 	'./weather.js',
 	'./city.cs.list.json',
 	'./forecast.html',
-	'./forecast.js',
-	'./favicon.ico'
+	'./forecast.js'
 ];
 
 self.addEventListener('install', async e => {
