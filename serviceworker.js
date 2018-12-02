@@ -10,7 +10,8 @@ const staticAssets = [
 	'./forecast.html',
 	'./forecast.js',
 	'./framework7.min.css',
-	'./framework7.min.js'
+	'./framework7.min.js',
+	'./framework7.min.js.map'
 ];
 
 self.addEventListener('install', async e => {
