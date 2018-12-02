@@ -1,11 +1,12 @@
 "use strict";
+var theweather;
 
 window.addEventListener("load", async e => {
 	initGui();
 });
  
 function initGui() {
-var theweather = new Framework7({
+  theweather = new Framework7({
   // App root element
   root: '#app',
   // App Name
