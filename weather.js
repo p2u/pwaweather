@@ -1,24 +1,16 @@
 "use strict";
 const main = document.querySelector('#weatherDescription');
-const citySelector = document.querySelector('#citySelector');
 const appKey = "b554424da5715ae40ee25d7ac9c307bf";
 const requestOpt = "&units=metric&lang=cz";
 const weatherUrl = "https://api.openweathermap.org/data/2.5/";
 const imgUrl = "https://openweathermap.org/img/w/";
 const userCityId = "userCityId";
 const defaultCityId = "3061370";	// Zlin
-var weather;
+var theweather;
+var $$;
 
 window.addEventListener("load", async e => {
-	await updateCitySelector();
 	setValue(userCityId, getValue(userCityId) || defaultCityId);
-	citySelector.value = getValue(userCityId);
-	citySelector.addEventListener("change", e => {
-		let cityId = e.target.value;
-		setValue(userCityId, cityId);
-		updateWeather();
-	});
-	updateWeather();
 	initGui();
 });
 
@@ -30,22 +22,17 @@ function setValue(name, value) {
         window.localStorage.setItem(name, value);
 }
 
-async function updateCitySelector() {
-	const citiesJson = await fetch("./city.cs.list.json");
-	const cities = await citiesJson.json();
-
-	citySelector.innerHTML = cities.map(
-		src => `<option value="${src.id}">${src.name}</options>`
-		).join('\n');
-};
-
 async function updateWeather() {
-	const cityId = getValue(userCityId);
-	const weatherJson = await fetch(`${weatherUrl}weather?id=${cityId}&appid=${appKey}${requestOpt}`);
-	weather = await weatherJson.json();
+	var weather = await getActualWeather();
 	printLocation(weather);
 	main.innerHTML = printWeather(weather);
 };
+
+async function getActualWeather() {
+	const cityId = getValue(userCityId);
+	const weatherJson = await fetch(`${weatherUrl}weather?id=${cityId}&appid=${appKey}${requestOpt}`);
+	return await weatherJson.json();
+}
 
 function printLocation(weather) {
 	const location = document.querySelector('#location');
@@ -77,7 +64,7 @@ function printWeather(weather) {
 };
 
 function initGui() {
-	var theweather = new Framework7({
+	theweather = new Framework7({
 	  // App root element
 	  root: '#app',
 	  // App Name
@@ -89,9 +76,18 @@ function initGui() {
 	    swipe: 'left',
 	  },
 	  // Add default routes
+	  routes: [
+		  { path: '/chooseCity/', componentUrl: './chooseCity.html'}
+	  ]
 	  // ... other parameters
 	});
-
+	$$ = Dom7;
+	$$(document).on('page:init','.page[data-name="home"]', function() {
+		updateWeather();
+	});
+	$$(document).on('page:reinit','.page[data-name="home"]', function() {
+		updateWeather();
+	});
 	var mainView = theweather.views.create('.view-main');
 }
 

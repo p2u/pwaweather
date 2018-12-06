@@ -43,10 +43,12 @@
 
           <!-- Scrollable page content -->
           <div class="page-content">
-		<select id="citySelector"></select>
-		<div class="card data-table" >
-			<div class="card-header">
-				<div id="location"></div>
+		<div class="data-table card" >
+			<div class="card-header link" onclick="theweather.router.navigate('/chooseCity/')">
+					<div class="data-table-title"> 
+						<a href="#" id="location"></a>
+					</div>
+					&gt;
 			</div>
 			<div class="card-content">
 				<table>
