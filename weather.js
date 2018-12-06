@@ -76,9 +76,6 @@ async function initGui() {
 	    swipe: 'left',
 	  },
 	  // Add default routes
-	  routes: [
-		  { path: '/chooseCity/', componentUrl: './choosecity.html'}
-	  ]
 	  // ... other parameters
 	});
 	$$ = Dom7;
