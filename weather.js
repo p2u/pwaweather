@@ -1,5 +1,5 @@
 "use strict";
-const main = document.querySelector('main');
+const main = document.querySelector('#weatherDescription');
 const citySelector = document.querySelector('#citySelector');
 const appKey = "b554424da5715ae40ee25d7ac9c307bf";
 const requestOpt = "&units=metric&lang=cz";
@@ -43,21 +43,36 @@ async function updateWeather() {
 	const cityId = getValue(userCityId);
 	const weatherJson = await fetch(`${weatherUrl}weather?id=${cityId}&appid=${appKey}${requestOpt}`);
 	weather = await weatherJson.json();
+	printLocation(weather);
 	main.innerHTML = printWeather(weather);
 };
 
+function printLocation(weather) {
+	const location = document.querySelector('#location');
+	location.innerHTML = `${weather.name}`;
+}
+
 function printWeather(weather) {
 	return `
-		Místo: ${weather.name} <br>
-		Severní šířka: ${weather.coord.lat} <br>
-		Východní délka: ${weather.coord.lon} <br>
-		Aktuální teplota: ${weather.main.temp} °C <br>
-		Aktuální počasí: ${weather.weather[0].description} <br>
-		Nejnižší teplota: ${weather.main.temp_min} °C <br>
-		Nejvyšší teplota: ${weather.main.temp_max} °C <br>
-		Atmosférický tlak: ${weather.main.pressure} hPa <br>
-		Vlhkost: ${weather.main.humidity} % <br>
-		<img src="${imgUrl}${weather.weather[0].icon}.png" alt="${weather.weather[0].description}" width="100" height="100"> <br>
+	<tr>
+		<td>Severní šířka:</td><td> ${weather.coord.lat} </td>
+	</tr><tr>
+		<td>Východní délka:</td><td> ${weather.coord.lon} </td>
+	</tr><tr>
+		<td>Aktuální teplota:</td><td> ${weather.main.temp} °C </td>
+	</tr><tr>
+		<td>Aktuální počasí:</td><td> ${weather.weather[0].description} </td>
+	</tr><tr>
+		<td>Nejnižší teplota:</td><td> ${weather.main.temp_min} °C </td>
+	</tr><tr>
+		<td>Nejvyšší teplota:</td><td> ${weather.main.temp_max} °C </td>
+	</tr><tr>
+		<td>Atmosférický tlak:</td><td> ${weather.main.pressure} hPa </td>
+	</tr><tr>
+		<td>Vlhkost:</td><td> ${weather.main.humidity} % </td>
+	</tr><tr>
+		<td colspan="2"> <img src="${imgUrl}${weather.weather[0].icon}.png" alt="${weather.weather[0].description}" width="100" height="100"> </td>
+	</tr>
 		`;
 };
 
