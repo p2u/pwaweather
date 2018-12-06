@@ -9,12 +9,12 @@ const cityId = getValue(userCityId);
 var weather;
 
 window.addEventListener("load", async e => {
+	initGui();
 	await fetchWeather();
 	main.innerHTML = `<div class="card"><div class="card-header">${weather.city.name} </div> </div>`;
 	for (let i = 0; i < weather.list.length; i++) {
 		main.innerHTML += printWeather(weather.list[i]);
 	}
-	initGui();
 });
 
 function getValue(name) {
