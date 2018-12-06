@@ -77,7 +77,7 @@ function initGui() {
 	  },
 	  // Add default routes
 	  routes: [
-		  { path: '/chooseCity/', componentUrl: './chooseCity.html'}
+		  { path: '/chooseCity/', componentUrl: './choosecity.html'}
 	  ]
 	  // ... other parameters
 	});
