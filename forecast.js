@@ -52,7 +52,7 @@ function printWeather(weather) {
 		</tr><tr>
 		<td>Atmosférický tlak:</td><td> ${weather.main.pressure} hPa </td>
 		</tr><tr>
-		<td colspan="2"><img src="${imgUrl}${weather.weather[0].icon}.png" alt="${weather.weather[0].description}" width="100" height="100"> </td>
+		<td colspan="2" style="text-align:center"><img src="${imgUrl}${weather.weather[0].icon}.png" alt="${weather.weather[0].description}" width="100" height="100"> </td>
 		</tr>
 					</tbody>
 				</table>
