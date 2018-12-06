@@ -6,7 +6,6 @@ const staticAssets = [
 	'./regsw.js',
 	'./weather.html',
 	'./weather.js',
-	'./choosecity.html',
 	'./city.cs.list.json',
 	'./forecast.html',
 	'./forecast.js',

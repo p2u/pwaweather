@@ -63,7 +63,7 @@ function printWeather(weather) {
 		`;
 };
 
-function initGui() {
+async function initGui() {
 	theweather = new Framework7({
 	  // App root element
 	  root: '#app',
@@ -89,5 +89,36 @@ function initGui() {
 		updateWeather();
 	});
 	var mainView = theweather.views.create('.view-main');
+		        const citiesJson = await fetch("./city.cs.list.json");
+		        const cities = await citiesJson.json();
+			const listOfCities = cities.map(city=>{return city.name});
+
+	var autocompleteStandaloneSimple = theweather.autocomplete.create({
+          openIn: 'page', //open in page
+          openerEl: '#autocomplete-standalone', //link that opens autocomplete
+          closeOnSelect: true, //go back after we select something
+          source: function (query, render) {
+            var results = [];
+            if (query.length === 0) {
+              render(results);
+              return;
+            }
+            // Find matched items
+            for (var i = 0; i < listOfCities.length; i++) {
+		    let cityName = listOfCities[i];
+              if (cityName.toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(cityName);
+            }
+            // Render items by passing array with result items
+            render(results);
+          },
+          on: {
+            change: function (value) {
+	      let cityId = cities.find(city=>value[0]==city.name).id;
+              setValue(userCityId, cityId);
+            },
+          },
+        });
+
+
 }
 

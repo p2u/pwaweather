@@ -44,11 +44,20 @@
           <!-- Scrollable page content -->
           <div class="page-content">
 		<div class="data-table card" >
-			<div class="card-header link" onclick="theweather.router.navigate('/chooseCity/')">
-					<div class="data-table-title"> 
-						<a href="#" id="location"></a>
-					</div>
-					&gt;
+			<div class="card-header" >
+	<div class="list">
+        <ul>
+          <li>
+            <a href="#" id="autocomplete-standalone" class="item-link item-content autocomplete-opener">
+              <div class="item-inner">
+		<div class="item-title" id="location">Vyber město</div>
+	        <div class="item-after"></div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
 			</div>
 			<div class="card-content">
 				<table>
